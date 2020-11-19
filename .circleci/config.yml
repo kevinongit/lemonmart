@@ -10,7 +10,7 @@ jobs:
       - restore_cache:
         keys:
           - v1-dependencies-{{ checksum "package-lock.json" }}
-      - run: npm circleci
+      - run: npm ci
 
       # force update the webdriver
       - run: cd ./node_modules/protractor && npm i webdrivermanager@latest
