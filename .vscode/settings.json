@@ -37,5 +37,8 @@
     "gitlens.menus": {
         "editorGroup": false
     },
-    "ng-evergreen.upgradeChannel": "Latest"
+    "ng-evergreen.upgradeChannel": "Latest",
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
 }

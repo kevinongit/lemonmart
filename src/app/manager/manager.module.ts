@@ -14,7 +14,12 @@ import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.componen
 // ]
 
 @NgModule({
-  declarations: [ManagerHomeComponent, ManagerComponent, UserManagementComponent, ReceiptLookupComponent],
+  declarations: [
+    ManagerHomeComponent,
+    ManagerComponent,
+    UserManagementComponent,
+    ReceiptLookupComponent,
+  ],
   imports: [
     CommonModule,
     ManagerRoutingModule,

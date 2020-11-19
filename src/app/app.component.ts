@@ -34,16 +34,16 @@ import { DomSanitizer } from '@angular/platform-browser'
   // `],
 })
 export class AppComponent {
-  // title = 'lemon-mart'
+  title = 'lemon-mart'
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
   ) {
-      iconRegistry.addSvgIcon(
-        'lemon',
-        sanitizer.bypassSecurityTrustResourceUrl(
-          'assets/img/icons/lemon.svg'
-        )
+    iconRegistry.addSvgIcon(
+      'lemon',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/img/icons/lemon.svg'
       )
+    )
   }
 }
