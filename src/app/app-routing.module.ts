@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router'
 
 import { HomeComponent } from './home/home.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
+
 // import { ManagerHomeComponent } from './manager/manager-home/manager-home.component'
 // import { managerModuleRoute } from './manager/manager.module'
 const routes: Routes = [
@@ -10,23 +11,20 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   {
     path: 'manager',
-    loadChildren: () => import('./manager/manager.module')
-      .then(m => m.ManagerModule),
+    loadChildren: () => import('./manager/manager.module').then((m) => m.ManagerModule),
   },
   {
     path: 'user',
-    loadChildren: () => import('./user/user.module')
-      .then(m => m.UserModule),
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
   },
   {
     path: 'pos',
-    loadChildren: () => import('./pos/pos.module')
-      .then(m => m.PosModule),
+    loadChildren: () => import('./pos/pos.module').then((m) => m.PosModule),
   },
   {
     path: 'inventory',
-    loadChildren: () => import('./inventory/inventory.module')
-      .then(m => m.InventoryModule),
+    loadChildren: () =>
+      import('./inventory/inventory.module').then((m) => m.InventoryModule),
   },
   { path: '**', component: PageNotFoundComponent },
 ]

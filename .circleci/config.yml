@@ -12,7 +12,7 @@ jobs:
       # because we use "npm ci" to install NPM dependencies
       # we cache "~/.npm folder"
 
-      - run: npm run style
+      - run: npm run style:fix
       - run: npm run lint
       - run: npm run build:prod
       - run: npm run test:coverage -- --watch-false

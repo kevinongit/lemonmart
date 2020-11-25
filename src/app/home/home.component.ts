@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-home',
@@ -10,15 +10,16 @@ import { Component, OnInit } from '@angular/core';
       </button>
     </div>
   `,
-  styles: [`
-    div[fxLayout] { margin-top: 32px; }
-  `],
+  styles: [
+    `
+      div[fxLayout] {
+        margin-top: 32px;
+      }
+    `,
+  ],
 })
 export class HomeComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

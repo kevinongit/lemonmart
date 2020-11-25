@@ -1,35 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-inventory',
   template: `
     <mat-toolbar color="accent" flexLayoutGap="8px">
-      <a mat-button
-        routerLink="/inventory/home"
-        routerLinkActive="active-link"
-      >
+      <a mat-button routerLink="/inventory/home" routerLinkActive="active-link">
         Inventory's Dashboard
       </a>
-      <a mat-button
-        routerLink="/inventory/stock"
-        routerLinkActive="active-link"
-      >
+      <a mat-button routerLink="/inventory/stock" routerLinkActive="active-link">
         Stock Entry
       </a>
-      <a mat-button
-        routerLink="/inventory/products"
-        routerLinkActive="active-link"
-      >
+      <a mat-button routerLink="/inventory/products" routerLinkActive="active-link">
         Products
       </a>
-      <a mat-button
-        routerLink="/inventory/categories"
-        routerLinkActive="active-link"
-      >
+      <a mat-button routerLink="/inventory/categories" routerLinkActive="active-link">
         Categories
       </a>
-
-
     </mat-toolbar>
     <router-outlet></router-outlet>
   `,
@@ -42,16 +28,13 @@ import { Component, OnInit } from '@angular/core';
     `
       .active-link {
         font-weight: bold;
-        border-bottom: 2px solid #005005
+        border-bottom: 2px solid #005005;
       }
     `,
-  ]
+  ],
 })
 export class InventoryComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
