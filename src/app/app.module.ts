@@ -14,10 +14,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AuthService } from './auth/auth.service'
 import { InMemoryAuthService } from './auth/auth.inmemory.service'
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
+import { SimpleDialogComponent } from './common/simple-dialog.component';
+import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, PageNotFoundComponent, LoginComponent],
+  declarations: [AppComponent, HomeComponent, PageNotFoundComponent, LoginComponent, SimpleDialogComponent, NavigationMenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

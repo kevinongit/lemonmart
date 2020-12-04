@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { catchError, filter, tap } from 'rxjs/operators';
 import { SubSink } from 'subsink';
+import { Role } from '../auth/auth.enum';
 import { AuthService } from '../auth/auth.service';
-
+import { UiService } from '../common/ui.service';
+import { EmailValidation, PasswordValidation } from '../common/validations';
 
 
 @Component({
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
+    private uiService: UiService,
   ) {
     this.subs.sink = route.paramMap.subscribe(
       params => (this.redirectUrl = params.get('redirectUrl') ?? '')
@@ -51,12 +54,8 @@ export class LoginComponent implements OnInit {
 
   buildLoginForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(50),
-      ]],
+      email: ['', EmailValidation],
+      password: ['', PasswordValidation],
     })
   }
 
@@ -78,10 +77,29 @@ export class LoginComponent implements OnInit {
           ([authStatus, user]) => authStatus.isAuthenticated && user?._id !== ''
         ),
         tap(([authStatus, user]) => {
-          this.router.navigate([this.redirectUrl || '/manager'])
+          console.log(`showToast`)
+          this.uiService.showToast(`Welcome ${user.fullName}! Role: ${user.role}`)
+          // this.uiService.showDialog(`Welcome ${user.fullName}!`, `Role: ${user.role}`)
+          this.router.navigate([this.redirectUrl ||
+            this.homeRouterPerRole(user.role as Role)
+          ])
         })
       )
       .subscribe()
   }
 
+  private homeRouterPerRole(role: Role) {
+    switch (role) {
+      case Role.Cashier:
+        return '/pos'
+      case Role.Clerk:
+        return '/inventory'
+      case Role.Manager:
+        return '/manager'
+      default:
+        return '/user/profile'
+    }
+  }
+
 }
+
