@@ -12,14 +12,20 @@ import { MaterialModule } from './material.module'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 
 import { AuthService } from './auth/auth.service'
-import { InMemoryAuthService } from './auth/auth.inmemory.service'
+// import { InMemoryAuthService } from './auth/auth.inmemory.service'
+// import { FirebaseAuthService } from './auth/auth.firebase.service'
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 import { LoginComponent } from './login/login.component';
 import { SimpleDialogComponent } from './common/simple-dialog.component';
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component'
+import { AngularFireModule, FirebaseApp } from '@angular/fire'
+import { environment } from 'src/environments/environment'
+import { authFactory } from './auth/auth.factory'
+import { AngularFireAuth } from '@angular/fire/auth'
+
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, PageNotFoundComponent, LoginComponent, SimpleDialogComponent, NavigationMenuComponent],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,11 +34,21 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
     FlexLayoutModule,
     HttpClientModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase)
+  ],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    PageNotFoundComponent,
+    LoginComponent,
+    SimpleDialogComponent,
+    NavigationMenuComponent
   ],
   providers: [
     {
       provide: AuthService,
-      useClass: InMemoryAuthService,
+      useFactory: authFactory,
+      deps: [AngularFireAuth],
     },
     {
       provide: HTTP_INTERCEPTORS,

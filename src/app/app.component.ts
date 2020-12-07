@@ -6,6 +6,7 @@ import { combineLatest } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
 import { AuthService } from './auth/auth.service'
+// import { AngularFirestore } from '@angular/fire/firestore'
 
 @Component({
   selector: 'app-root',
@@ -115,6 +116,7 @@ export class AppComponent implements OnInit, OnDestroy {
     sanitizer: DomSanitizer,
     public authService: AuthService,
     public media: MediaObserver,
+    // fireStore: AngularFirestore
   ) {
     iconRegistry.addSvgIcon(
       'lemon',
