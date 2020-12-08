@@ -59,7 +59,7 @@ export class MatIconRegisryFake {
 }
 
 export class DomSanitizerFake {
-  bypassSecurityResourceUrl(url: string): SafeResourceUrl {
+  bypassSecurityTrustResourceUrl(url: string): SafeResourceUrl {
     return {} as SafeResourceUrl
   }
   sanitize(context: SecurityContext, value: SafeValue | string | null): string | null {
@@ -67,13 +67,13 @@ export class DomSanitizerFake {
   }
 }
 
-export const CommonTestingProviders: any[] = [
+export const commonTestingProviders: any[] = [
   // Intentionally Left Blank!!!
   { provide: AuthService, useValue: autoSpyObj(AuthService) },
   { provide: UiService, useValue: autoSpyObj(UiService) },
 ]
 
-export const CommonTestingModules: any[] = [
+export const commonTestingModules: any[] = [
   ReactiveFormsModule,
   MaterialModule,
   NoopAnimationsModule,
