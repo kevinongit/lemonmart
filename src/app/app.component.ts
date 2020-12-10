@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser'
 import { combineLatest } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { SubSink } from 'subsink'
+
 import { AuthService } from './auth/auth.service'
 // import { AngularFirestore } from '@angular/fire/firestore'
 
@@ -73,7 +74,7 @@ import { AuthService } from './auth/auth.service'
   `,
   styles: [
     `
-    .app-container {
+      .app-container {
         display: flex;
         flex-direction: column;
         position: absolute;
@@ -81,29 +82,29 @@ import { AuthService } from './auth/auth.service'
         bottom: 0;
         left: 0;
         right: 0;
-    }
-    .app-is-mobile .app-toolbar {
+      }
+      .app-is-mobile .app-toolbar {
         position: fixed;
         z-index: 2;
-    }
-    .app-sidenav-container {
+      }
+      .app-sidenav-container {
         flex: 1;
-    }
-    .app-is-mobile .app-sidenav-container {
+      }
+      .app-is-mobile .app-sidenav-container {
         flex: 1 0 auto;
-    }
-    mat-sidenav {
+      }
+      mat-sidenav {
         width: 200px;
-    }
-    .image-cropper {
+      }
+      .image-cropper {
         width: 40px;
         height: 40px;
         position: relative;
         overflow: hidden;
         border-radius: 50%;
         margin-top: -8px;
-    }
-  `,
+      }
+    `,
   ],
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -114,9 +115,9 @@ export class AppComponent implements OnInit, OnDestroy {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public authService: AuthService,
-    public media: MediaObserver,
-    // fireStore: AngularFirestore
-  ) {
+    public media: MediaObserver
+  ) // fireStore: AngularFirestore
+  {
     iconRegistry.addSvgIcon(
       'lemon',
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/lemon.svg')
@@ -147,5 +148,4 @@ export class AppComponent implements OnInit, OnDestroy {
       )
       .subscribe()
   }
-
 }

@@ -1,4 +1,5 @@
-import { R3InjectableMetadata } from '@angular/compiler';
+import { R3InjectableMetadata } from '@angular/compiler'
+
 import { Role } from '../../auth/auth.enum'
 
 export interface IName {
@@ -59,7 +60,7 @@ export class User implements IUser {
       zip: '',
     },
     public phones: IPhone[] = []
-  ) { }
+  ) {}
 
   static Build(user: IUser) {
     if (!user) {
@@ -80,7 +81,7 @@ export class User implements IUser {
       user.userStatus,
       user.level,
       user.address,
-      user.phones,
+      user.phones
     )
   }
 

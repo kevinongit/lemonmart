@@ -3,10 +3,10 @@ import { MediaObserver } from '@angular/flex-layout'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
 import {
+  ObservablePropertyStrategy,
   autoSpyObj,
   createComponentMock,
   injectSpy,
-  ObservablePropertyStrategy
 } from 'angular-unit-test-helper'
 
 import { AppComponent } from './app.component'
@@ -26,7 +26,7 @@ describe('AppComponent', () => {
       const authServiceSpy = autoSpyObj(
         AuthService,
         ['authStatus$'],
-        ObservablePropertyStrategy.BehaviorSubject,
+        ObservablePropertyStrategy.BehaviorSubject
       )
 
       TestBed.configureTestingModule({

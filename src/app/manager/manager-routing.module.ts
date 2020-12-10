@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
+
 import { AuthGuard } from '../auth/auth-guard.service'
 import { Role } from '../auth/auth.enum'
-
 import { ManagerHomeComponent } from './manager-home/manager-home.component'
 import { ManagerComponent } from './manager.component'
 import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.component'
@@ -16,7 +16,7 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: '/manager/home',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'home',
@@ -40,7 +40,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           expectedRoute: Role.Manager,
-        }
+        },
       },
     ],
   },
@@ -50,4 +50,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ManagerRoutingModule { }
+export class ManagerRoutingModule {}

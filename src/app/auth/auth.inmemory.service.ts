@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core'
-
-import { AuthService, IAuthStatus, IServerAuthResponse } from './auth.service'
-import { sign } from 'fake-jwt-sign'  // For InMemoryAuthService only
+import { sign } from 'fake-jwt-sign'
 import { Observable, of, throwError } from 'rxjs'
-import { Role } from './auth.enum'
 
 import { PhoneType, User } from '../user/user/user'
+import { Role } from './auth.enum'
+import { AuthService, IAuthStatus, IServerAuthResponse } from './auth.service'
+
+// For InMemoryAuthService only
 
 @Injectable()
 export class InMemoryAuthService extends AuthService {
@@ -35,13 +36,13 @@ export class InMemoryAuthService extends AuthService {
       {
         id: 0,
         type: PhoneType.Mobile,
-        digits: '01011112222'
+        digits: '01011112222',
       },
     ],
   })
   protected authProvider(
     email: string,
-    password: string,
+    password: string
   ): Observable<IServerAuthResponse> {
     email = email.toLowerCase()
 
@@ -55,10 +56,10 @@ export class InMemoryAuthService extends AuthService {
       userRole: email.includes('cashier')
         ? Role.Cashier
         : email.includes('clerk')
-          ? Role.Clerk
-          : email.includes('manager')
-            ? Role.Manager
-            : Role.None,
+        ? Role.Clerk
+        : email.includes('manager')
+        ? Role.Manager
+        : Role.None,
     } as IAuthStatus
     this.defaultUser.role = authStatus.userRole
 

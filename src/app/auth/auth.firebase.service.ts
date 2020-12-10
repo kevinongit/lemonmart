@@ -10,9 +10,9 @@ import { Role } from './auth.enum'
 import {
   AuthService,
   IAuthService,
+  IAuthStatus,
   IServerAuthResponse,
   defaultAuthStatus,
-  IAuthStatus,
 } from './auth.service'
 
 interface IJwtToken {
@@ -24,15 +24,13 @@ interface IJwtToken {
 
 @Injectable()
 export class FirebaseAuthService extends AuthService {
-  constructor(
-    private afAuth: AngularFireAuth
-  ) {
+  constructor(private afAuth: AngularFireAuth) {
     super()
   }
 
   protected authProvider(
     email: string,
-    password: string,
+    password: string
   ): Observable<IServerAuthResponse> {
     const serverResponse$ = new Subject<IServerAuthResponse>()
 
@@ -40,9 +38,7 @@ export class FirebaseAuthService extends AuthService {
       (res) => {
         const firebaseUser: firebase.User | null = res.user
         firebaseUser?.getIdToken().then(
-          (token) => serverResponse$.next(
-            { accessToken: token } as IServerAuthResponse
-          ),
+          (token) => serverResponse$.next({ accessToken: token } as IServerAuthResponse),
           (err) => serverResponse$.error(err)
         )
       },
@@ -64,9 +60,7 @@ export class FirebaseAuthService extends AuthService {
   }
 
   protected getCurrentUser(): Observable<User> {
-    return this.afAuth.user.pipe(
-      map(this.transformFirebaseUser)
-    )
+    return this.afAuth.user.pipe(map(this.transformFirebaseUser))
   }
 
   private transformFirebaseUser(firebaseUser: firebase.User | null): User {
@@ -93,5 +87,4 @@ export class FirebaseAuthService extends AuthService {
     this.clearToken()
     this.authStatus$.next(defaultAuthStatus)
   }
-
 }

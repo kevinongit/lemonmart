@@ -1,5 +1,3 @@
-
-
 export abstract class CacheService {
   protected getItem<T>(key: string): T | null {
     const data = localStorage.getItem(key)
@@ -14,7 +12,7 @@ export abstract class CacheService {
     /// 2020.12.03 kevin - needs to be posted as PR.
     /// It seems a bug, string should be (also) saved through JSON.stringify()
     /// Otherwise, JSON.parse will complain an error while parsing.
-    localStorage.setItem(key, JSON.stringify(data));
+    localStorage.setItem(key, JSON.stringify(data))
     // if (typeof data === 'string') {
     //   localStorage.setItem(key, data)
     // } else {

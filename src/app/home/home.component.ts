@@ -5,20 +5,15 @@ import { filter, tap } from 'rxjs/operators'
 
 import { AuthService, defaultAuthStatus } from '../auth/auth.service'
 
-
 @Component({
   selector: 'app-home',
   template: `
     <div *ngIf="(authService.authStatus$ | async)?.isAuthenticated; else doLogin">
-      <div class="mat-display-4">
-        This is LemonMart! The place where
-      </div>
+      <div class="mat-display-4">This is LemonMart! The place where</div>
       <div class="mat-display-4">
         You get a lemon, you get a lemon, you get a lemon...
       </div>
-      <div class="mat-display-4">
-        Everybody gets a lemon.
-      </div>
+      <div class="mat-display-4">Everybody gets a lemon.</div>
     </div>
     <ng-template #doLogin>
       <app-login></app-login>
@@ -34,13 +29,9 @@ import { AuthService, defaultAuthStatus } from '../auth/auth.service'
 })
 export class HomeComponent implements OnInit {
   displayLogin = true
-  constructor(
-    public authService: AuthService,
-    private router: Router,
-  ) { }
+  constructor(public authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void { }
-
+  ngOnInit(): void {}
 
   // login() {
   //   this.authService.login('manager@test.com', '12345678')
@@ -58,5 +49,4 @@ export class HomeComponent implements OnInit {
   //     )
   //     .subscribe()
   // }
-
 }

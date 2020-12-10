@@ -1,10 +1,10 @@
+import { Injectable } from '@angular/core'
 // import * as decode from 'jwt-decode'
 import decode from 'jwt-decode'
-import { transformError } from '../common/common'
-
-import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, pipe, throwError } from 'rxjs'
 import { catchError, filter, flatMap, map, tap } from 'rxjs/operators'
+
+import { transformError } from '../common/common'
 import { IUser, User } from '../user/user/user'
 import { Role } from './auth.enum'
 import { CacheService } from './cache.service'
@@ -40,11 +40,11 @@ export abstract class AuthService extends CacheService implements IAuthService {
     filter((status: IAuthStatus) => status.isAuthenticated),
     flatMap(() => this.getCurrentUser()),
     map((user: IUser) => this.currentUser$.next(user)),
-    catchError(transformError),
+    catchError(transformError)
   )
   protected abstract authProvider(
     email: string,
-    password: string,
+    password: string
   ): Observable<IServerAuthResponse>
   protected abstract transformJwtToken(token: unknown): IAuthStatus
   protected abstract getCurrentUser(): Observable<User>
@@ -52,8 +52,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
   readonly authStatus$ = new BehaviorSubject<IAuthStatus>(
     this.getItem('authStatus') ?? defaultAuthStatus
   )
-  readonly currentUser$ =
-    new BehaviorSubject<IUser>(new User())
+  readonly currentUser$ = new BehaviorSubject<IUser>(new User())
   protected readonly resumeCurrentUser$ = this.authStatus$.pipe(
     this.getAndUpdateUserIfAuthenticated
   )
@@ -66,9 +65,9 @@ export abstract class AuthService extends CacheService implements IAuthService {
       this.logout(true)
     } else {
       console.log('44444')
-      const token = this.getAuthStatusFromToken();
+      const token = this.getAuthStatusFromToken()
       console.log(`constructor token(${token}) from cache`)
-      this.authStatus$.next(token);
+      this.authStatus$.next(token)
       // this.authStatus$.next(this.getAuthStatusFromToken())
       /// To load user on brower refresh,
       /// resume pipeline must activate on the next cycle
@@ -77,29 +76,25 @@ export abstract class AuthService extends CacheService implements IAuthService {
     }
   }
 
-
-
   login(email: string, password: string): Observable<void> {
     this.clearToken()
 
     console.log(`email(${email},password(${password}))`)
-    const loginResponse$ = this.authProvider(email, password)
-      .pipe(
-        map((value) => {
-          console.log(`value=${JSON.stringify(value)}`)
-          this.setToken(value.accessToken)
-          const token = decode(value.accessToken)
-          return this.transformJwtToken(token)
-        }),
-        tap((status) => {
-          console.log(`status=${JSON.stringify(status)}`)
-          return this.authStatus$.next(status)
-        }),
-        this.getAndUpdateUserIfAuthenticated,
-
-      )
+    const loginResponse$ = this.authProvider(email, password).pipe(
+      map((value) => {
+        console.log(`value=${JSON.stringify(value)}`)
+        this.setToken(value.accessToken)
+        const token = decode(value.accessToken)
+        return this.transformJwtToken(token)
+      }),
+      tap((status) => {
+        console.log(`status=${JSON.stringify(status)}`)
+        return this.authStatus$.next(status)
+      }),
+      this.getAndUpdateUserIfAuthenticated
+    )
     loginResponse$.subscribe({
-      error: err => {
+      error: (err) => {
         this.logout()
         return throwError(err)
       },

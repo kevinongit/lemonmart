@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
-import { catchError, filter, tap } from 'rxjs/operators';
-import { SubSink } from 'subsink';
-import { Role } from '../auth/auth.enum';
-import { AuthService } from '../auth/auth.service';
-import { UiService } from '../common/ui.service';
-import { EmailValidation, PasswordValidation } from '../common/validations';
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
+import { combineLatest } from 'rxjs'
+import { catchError, filter, tap } from 'rxjs/operators'
+import { SubSink } from 'subsink'
 
+import { Role } from '../auth/auth.enum'
+import { AuthService } from '../auth/auth.service'
+import { UiService } from '../common/ui.service'
+import { EmailValidation, PasswordValidation } from '../common/validations'
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ import { EmailValidation, PasswordValidation } from '../common/validations';
   styles: [
     `
       .error {
-        color: red
+        color: red;
       }
     `,
     `
@@ -24,14 +24,14 @@ import { EmailValidation, PasswordValidation } from '../common/validations';
         margin-top: 32px;
       }
     `,
-  ]
+  ],
 })
 export class LoginComponent implements OnInit {
   private subs = new SubSink()
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
-  });
+  })
   loginError = ''
   redirectUrl: string = ''
 
@@ -40,10 +40,10 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private uiService: UiService,
+    private uiService: UiService
   ) {
     this.subs.sink = route.paramMap.subscribe(
-      params => (this.redirectUrl = params.get('redirectUrl') ?? '')
+      (params) => (this.redirectUrl = params.get('redirectUrl') ?? '')
     )
   }
 
@@ -61,27 +61,20 @@ export class LoginComponent implements OnInit {
 
   async login(submittedForm: FormGroup) {
     this.authService
-      .login(
-        submittedForm.value.email,
-        submittedForm.value.password,
-      )
-      .pipe(
-        catchError(err => (this.loginError = err))
-      )
+      .login(submittedForm.value.email, submittedForm.value.password)
+      .pipe(catchError((err) => (this.loginError = err)))
     this.subs.sink = combineLatest([
       this.authService.authStatus$,
       this.authService.currentUser$,
     ])
       .pipe(
-        filter(
-          ([authStatus, user]) => authStatus.isAuthenticated && user?._id !== ''
-        ),
+        filter(([authStatus, user]) => authStatus.isAuthenticated && user?._id !== ''),
         tap(([authStatus, user]) => {
           console.log(`showToast`)
           this.uiService.showToast(`Welcome ${user.fullName}! Role: ${user.role}`)
           // this.uiService.showDialog(`Welcome ${user.fullName}!`, `Role: ${user.role}`)
-          this.router.navigate([this.redirectUrl ||
-            this.homeRouterPerRole(user.role as Role)
+          this.router.navigate([
+            this.redirectUrl || this.homeRouterPerRole(user.role as Role),
           ])
         })
       )
@@ -100,6 +93,4 @@ export class LoginComponent implements OnInit {
         return '/user/profile'
     }
   }
-
 }
-

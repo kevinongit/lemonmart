@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -16,15 +16,14 @@ import { Role } from './auth.enum'
 import { AuthService } from './auth.service'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-
   constructor(
     protected authService: AuthService,
     protected router: Router,
-    private uiService: UiService,
-  ) { }
+    private uiService: UiService
+  ) {}
 
   canLoad(route: Route): boolean | Observable<boolean> | Promise<boolean> {
     return this.checkLogin()
@@ -54,19 +53,16 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
           this.router.navigate(['login'], {
             queryParams: {
               redirectUrl: this.getResolvedUrl(route),
-            }
+            },
           })
         }
         return allowLogin
       }),
-      take(1), // complete the observable for the guard to work
+      take(1) // complete the observable for the guard to work
     )
   }
 
-  private checkRoleMatch(
-    role: Role,
-    route?: ActivatedRouteSnapshot
-  ) {
+  private checkRoleMatch(role: Role, route?: ActivatedRouteSnapshot) {
     if (!route?.data?.expectedRoute) {
       return true
     }
@@ -90,11 +86,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     return route.pathFromRoot
-      .map((r) => r.url.map((segment) => segment.toString())
-        .join('/')
-      )
+      .map((r) => r.url.map((segment) => segment.toString()).join('/'))
       .join('/')
       .replace('//', '/')
   }
-
 }

@@ -7,6 +7,7 @@ import { ManagerRoutingModule } from './manager-routing.module'
 import { ManagerComponent } from './manager.component'
 import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.component'
 import { UserManagementComponent } from './user-management/user-management.component'
+
 // import { Routes } from '@angular/router'
 
 // export const managerModuleRoute: Routes = [

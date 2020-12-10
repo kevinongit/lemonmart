@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 
 @Component({
   // prettier-ignore
@@ -18,17 +18,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
       </button>
     </mat-dialog-actions>
   `,
-  styles: [
-  ]
+  styles: [],
 })
 export class SimpleDialogComponent {
-
   constructor(
     public dialogRef: MatDialogRef<SimpleDialogComponent, boolean>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

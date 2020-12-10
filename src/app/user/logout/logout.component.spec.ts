@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { commonTestingModules, commonTestingProviders } from 'src/app/common/common.testing'
+import {
+  commonTestingModules,
+  commonTestingProviders,
+} from 'src/app/common/common.testing'
 
 import { LogoutComponent } from './logout.component'
 

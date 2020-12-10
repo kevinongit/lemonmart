@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { createComponentMock } from 'angular-unit-test-helper'
-import { commonTestingModules, commonTestingProviders } from '../common/common.testing'
 
+import { commonTestingModules, commonTestingProviders } from '../common/common.testing'
 import { HomeComponent } from './home.component'
 
 describe('HomeComponent', () => {

@@ -1,4 +1,4 @@
-import { AuthMode } from 'src/app/auth/auth.enum';
+import { AuthMode } from 'src/app/auth/auth.enum'
 
 export const environment = {
   production: true,
@@ -12,5 +12,5 @@ export const environment = {
     messagingSenderId: '42030272657',
     appId: '1:42030272657:web:d7db11560948de73f0af30',
     measurementId: '',
-  }
+  },
 }

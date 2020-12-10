@@ -2,7 +2,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { AuthMode } from 'src/app/auth/auth.enum';
+import { AuthMode } from 'src/app/auth/auth.enum'
 
 export const environment = {
   production: false,
@@ -16,7 +16,7 @@ export const environment = {
     messagingSenderId: '42030272657',
     appId: '1:42030272657:web:d7db11560948de73f0af30',
     measurementId: '',
-  }
+  },
 }
 
 /*
