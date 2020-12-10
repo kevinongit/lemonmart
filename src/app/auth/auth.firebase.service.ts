@@ -9,7 +9,6 @@ import { IUser, User } from '../user/user/user'
 import { Role } from './auth.enum'
 import {
   AuthService,
-  IAuthService,
   IAuthStatus,
   IServerAuthResponse,
   defaultAuthStatus,

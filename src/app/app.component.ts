@@ -109,15 +109,14 @@ import { AuthService } from './auth/auth.service'
 })
 export class AppComponent implements OnInit, OnDestroy {
   private subs = new SubSink()
-  opened: boolean = false
+  opened = false
 
   constructor(
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     public authService: AuthService,
-    public media: MediaObserver
-  ) // fireStore: AngularFirestore
-  {
+    public media: MediaObserver // fireStore: AngularFirestore
+  ) {
     iconRegistry.addSvgIcon(
       'lemon',
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/icons/lemon.svg')

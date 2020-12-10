@@ -25,6 +25,4 @@ export class SimpleDialogComponent {
     public dialogRef: MatDialogRef<SimpleDialogComponent, boolean>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-
-  ngOnInit(): void {}
 }

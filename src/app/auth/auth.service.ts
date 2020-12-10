@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 // import * as decode from 'jwt-decode'
 import decode from 'jwt-decode'
 import { BehaviorSubject, Observable, pipe, throwError } from 'rxjs'
-import { catchError, filter, flatMap, map, tap } from 'rxjs/operators'
+import { catchError, filter, map, mergeMap, tap } from 'rxjs/operators'
 
 import { transformError } from '../common/common'
 import { IUser, User } from '../user/user/user'
@@ -36,27 +36,6 @@ export interface IAuthService {
 
 @Injectable()
 export abstract class AuthService extends CacheService implements IAuthService {
-  private getAndUpdateUserIfAuthenticated = pipe(
-    filter((status: IAuthStatus) => status.isAuthenticated),
-    flatMap(() => this.getCurrentUser()),
-    map((user: IUser) => this.currentUser$.next(user)),
-    catchError(transformError)
-  )
-  protected abstract authProvider(
-    email: string,
-    password: string
-  ): Observable<IServerAuthResponse>
-  protected abstract transformJwtToken(token: unknown): IAuthStatus
-  protected abstract getCurrentUser(): Observable<User>
-
-  readonly authStatus$ = new BehaviorSubject<IAuthStatus>(
-    this.getItem('authStatus') ?? defaultAuthStatus
-  )
-  readonly currentUser$ = new BehaviorSubject<IUser>(new User())
-  protected readonly resumeCurrentUser$ = this.authStatus$.pipe(
-    this.getAndUpdateUserIfAuthenticated
-  )
-
   constructor() {
     super()
     console.log('11111')
@@ -75,6 +54,26 @@ export abstract class AuthService extends CacheService implements IAuthService {
       setTimeout(() => this.resumeCurrentUser$.subscribe(), 0)
     }
   }
+  private getAndUpdateUserIfAuthenticated = pipe(
+    filter((status: IAuthStatus) => status.isAuthenticated),
+    mergeMap(() => this.getCurrentUser()),
+    map((user: IUser) => this.currentUser$.next(user)),
+    catchError(transformError)
+  )
+
+  readonly authStatus$ = new BehaviorSubject<IAuthStatus>(
+    this.getItem('authStatus') ?? defaultAuthStatus
+  )
+  readonly currentUser$ = new BehaviorSubject<IUser>(new User())
+  protected readonly resumeCurrentUser$ = this.authStatus$.pipe(
+    this.getAndUpdateUserIfAuthenticated
+  )
+  protected abstract authProvider(
+    email: string,
+    password: string
+  ): Observable<IServerAuthResponse>
+  protected abstract transformJwtToken(token: unknown): IAuthStatus
+  protected abstract getCurrentUser(): Observable<User>
 
   login(email: string, password: string): Observable<void> {
     this.clearToken()

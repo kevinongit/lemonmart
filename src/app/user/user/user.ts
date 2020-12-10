@@ -1,5 +1,3 @@
-import { R3InjectableMetadata } from '@angular/compiler'
-
 import { Role } from '../../auth/auth.enum'
 
 export interface IName {

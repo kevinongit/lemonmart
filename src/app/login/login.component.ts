@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { combineLatest } from 'rxjs'
 import { catchError, filter, tap } from 'rxjs/operators'
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   })
   loginError = ''
-  redirectUrl: string = ''
+  redirectUrl = ''
 
   constructor(
     private formBuilder: FormBuilder,
