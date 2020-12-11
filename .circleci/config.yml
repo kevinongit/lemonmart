@@ -25,7 +25,7 @@ jobs:
       - run: npm run style
       - run: npm run lint
       - run: npm run build:prod
-      - run: npm run test:coverage -- --watch=false --code-coverage
+      # - run: npm run test:coverage -- --watch=false --code-coverage
       - run: npm run e2e
 
       - store_test_results:
@@ -46,8 +46,7 @@ jobs:
 
       - run:
           name: Move compiled app to workspace
-          command:
-            set -exu
+          command: set -exu
             mkdir -p /tmp/workspace/dist
             mv dist/lemon-mart /tmp/workspace/dist/
       - persist_to_workspace:
