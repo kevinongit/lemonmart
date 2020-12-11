@@ -35,7 +35,7 @@ jobs:
 
       # upload coverage report to coveralls for readme badge support
       # require config.yml version 2.1 and orbs: coveralls: coveralls/coveralls@1.0.4
-      # requires coveralls account and token nameed COVERALLS_REPO_TOKEN specific to repo to be stored in CircleCI
+      # requires coveralls account and token named COVERALLS_REPO_TOKEN specific to repo to be stored in CircleCI
       # - coveralls/upload
 
       - run:
@@ -46,7 +46,8 @@ jobs:
 
       - run:
           name: Move compiled app to workspace
-          command: set -exu
+          command: |
+            set -exu
             mkdir -p /tmp/workspace/dist
             mv dist/lemon-mart /tmp/workspace/dist/
       - persist_to_workspace:
