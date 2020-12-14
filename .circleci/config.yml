@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  coveralls:  coveralls/coveralls@1.0.4
 jobs:
   build:
     docker:
@@ -18,9 +20,21 @@ jobs:
           key: build-image-{{ .BuildNum }}
           paths:
             - docker-cache
+      - run: npm test -- --watch=false --code-coverage
+      - run: npm run e2e
+      - store_test_results:
+          path: ./test_results
       - store_artifacts:
-          path: docker-cache/built-image.tar.gz
-          destination: built-image.tar.gz
+          path: ./coverage
+
+      - coveralls/upload
+
+      - run :
+          name: Tar & Gzip compiled app
+          command: tar zcf dist.tar.gz dist/lemon-mart
+
+      - store_artifacts:
+          path: dist.tar.gz
 
 workflows:
   version: 2
