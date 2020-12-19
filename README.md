@@ -1,5 +1,6 @@
 # LemonMart
 
+[![Known Vulnerabilities](https://snyk.io/test/github/kevinongit/lemonmart/badge.svg?targetFile=Dockerfile)](https://snyk.io/test/github/kevinongit/lemonmart?targetFile=Dockerfile)
 ![Coveralls github](https://img.shields.io/coveralls/github/kevinongit/lemonmart?style=flat-square)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
