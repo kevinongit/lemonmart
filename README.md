@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/kevinongit/lemonmart.svg?style=svg)](https://app.circleci.com/pipelines/github/kevinongit/lemonmart)
 [![Known Vulnerabilities](https://snyk.io/test/github/kevinongit/lemonmart/badge.svg?targetFile=package.json)](https://snyk.io/test/github/kevinongit/lemonmart?targetFile=package.json)
-![Coveralls github](https://img.shields.io/coveralls/github/kevinongit/lemonmart?style=flat-square)
+[![Coverage Status](https://coveralls.io/repos/github/kevinongit/lemonmart/badge.svg?branch=main)](https://coveralls.io/github/kevinongit/lemonmart?branch=main)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
 
