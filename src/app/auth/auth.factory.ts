@@ -7,16 +7,13 @@ import { AuthMode } from './auth.enum'
 import { FirebaseAuthService } from './auth.firebase.service'
 import { InMemoryAuthService } from './auth.inmemory.service'
 
-export function authFactory(
-  afAuth: AngularFireAuth,
-  httpClient: HttpClient,
-) {
+export function authFactory(afAuth: AngularFireAuth, httpClient: HttpClient) {
   switch (environment.authMode) {
     case AuthMode.InMemory:
       return new InMemoryAuthService()
     case AuthMode.Firebase:
       return new FirebaseAuthService(afAuth)
     case AuthMode.CustomServer:
-      throw new CustomAuthService(httpClient)
+      return new CustomAuthService(httpClient)
   }
 }
